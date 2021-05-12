@@ -1,0 +1,363 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* aqui vamos a declarar los variables  */
+
+:root {
+    /* es para activar el modo ascuro*/
+    --dark: #242323;
+    /* es fondo blanco */
+    --light: #d0d0d0;
+    /* es la sombra oscura que tenda en fondo blanco*/
+    --box-shadow-oscuro: 1px 15px 50px rgba(0, 0, 0, 0.816);
+    /* la sobra del primer card en modo oscuro */
+    --box-shadow-1: 1px 15px 50px rgba(0, 255, 251, 0.816);
+    /* yo aqui tengo el codigo para mas facil */
+
+    /* la sobra del segundo card en modo oscuro */
+    --box-shadow-2: 1px 15px 50px rgba(229, 255, 0, 0.85);
+    /* la sobra del tercer card en modo oscuro */
+    --box-shadow-3: 1px 15px 50px rgba(255, 6, 93, 0.789);
+    /* la sobra del boton */
+    --box-shadow-boton: -2px -2px 5px #fff, 3px 3px 6px rgba(0, 0, 0, 0.15),
+        inset -2px -2px 5px rgba(255, 255, 255, 0.3),
+        inset 3px 3px 6px rgba(0, 0, 0, 0.1);
+
+}
+
+
+body {
+    background: var(--light);
+    transition: background 0.5s;
+}
+
+/* cuando el body tenga la clase dark se va a cambiar en modo oscuro */
+body.dark {
+    background: var(--dark);
+}
+
+
+.boton-dark .btn {
+    position: relative;
+    top: 15px;
+    width: 30px;
+    height: 30px;
+    margin-left: 80%;
+    z-index: 1;
+    background: var(--light);
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: var(--box-shadow-boton);
+    display: grid;
+    place-items: center;
+    font-size: 1.4rem;
+}
+
+.boton-dark .btn:hover {
+    transform: scale(0.9);
+}
+
+.boton-dark .btn::before {
+    /* es importante color solo el codigo para que funcione y que aparesca en tu navegador */
+    content: '\f186';
+    /* es importante color el fontfamily con fontawesome para que funcione*/
+    font-family: fontAwesome;
+    color: #000;
+}
+
+body.dark .boton-dark .btn::before {
+    content: '\f185';
+    font-family: fontAwesome;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+
+.container {
+    width: 1100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.container .card {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow-oscuro);
+}
+
+.container .card .image img {
+    width: 100%;
+    /* para tener el ancho del imagen completo*/
+    height: 100%;
+    /* para tener la altura del imagen completo*/
+    object-fit: cover;
+    /* para que el imagen esta sentrado y bien estirado*/
+}
+
+/*  es para que se ponga gris las imagenes cuando se pasa el cursor */
+.container:hover .card {
+    opacity: 0.2;
+}
+
+.container .card:hover {
+    opacity: 1;
+}
+
+/* que cuando se pone el cursor en las imanges y las dos se quedan con la opacidad de gris */
+.container .card::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+}
+
+.container .card span {
+    /* para que los bordes pasan en solo 5 segundo*/
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.container .card:hover span {
+    opacity: 1;
+}
+
+/* Aqui solo vamos a elegir el primer card que tengla las clases UNO */
+/* nth-child() sirve para elegir son un div o un contenedor */
+
+/* 
+  PRIMER CARD 
+*/
+
+/* cuando se active el modo oscuro */
+body.dark .container .card:nth-child(1) {
+    box-shadow: var(--box-shadow-1);
+}
+
+.container .card span.uno:nth-child(1) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, transparent, #00f7ff);
+    animation: animate1 2s linear infinite;
+}
+
+/* keyframes con esto vamos a darle a los bordes sus estilos  */
+@keyframes animate1 {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* DERECHA */
+.container .card span.uno:nth-child(2) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, #00f7ff);
+    animation: animate2 2s linear infinite;
+    animation-delay: 1s;
+}
+
+/* keyframes con esto vamos a darle a los bordes sus estilos  */
+@keyframes animate2 {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+/* ABAJO */
+.container .card span.uno:nth-child(3) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to left, transparent, #00f7ff);
+    animation: animate3 2s linear infinite;
+    animation-delay: 1s;
+}
+
+/* 
+TOP: ARRIBA
+BOTTOM: ABAJO
+LEFT: IZQUIERDA
+RIGHT: DERECHA solo para dejarlos claro por si tienen duda
+*/
+
+@keyframes animate3 {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* izquierda */
+.container .card span.uno:nth-child(4) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to top, transparent, #00f7ff);
+    animation: animate4 2s linear infinite;
+    animation-delay: 1s;
+}
+
+@keyframes animate4 {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+
+/* 
+SEGUNDA TARJETA
+*/
+/* cuando se active el modo oscuro */
+body.dark .container .card:nth-child(2) {
+    box-shadow: var(--box-shadow-2);
+}
+
+/* arriba */
+.container .card span.dos:nth-child(1) {
+    /* aqui ya seria la clase de dos del SPAN*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, transparent, #f2ff00);
+    animation: animate1 2s linear infinite;
+}
+
+/* DERECHA */
+.container .card span.dos:nth-child(2) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, #f2ff00);
+    animation: animate2 2s linear infinite;
+    animation-delay: 1s;
+}
+
+/* ABAJO */
+.container .card span.dos:nth-child(3) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to left, transparent, #f2ff00);
+    animation: animate3 2s linear infinite;
+    animation-delay: 1s;
+}
+
+/* izquierda */
+.container .card span.dos:nth-child(4) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to top, transparent, #f2ff00);
+    animation: animate4 2s linear infinite;
+    animation-delay: 1s;
+}
+
+/* en todas los span con sus clases ya no se va a cambiar nada solo se estaria 
+cambiando los colores */
+
+
+/* 
+TERCER TARJETA
+*/
+/* cuando se active el modo oscuro */
+body.dark .container .card:nth-child(3) {
+    box-shadow: var(--box-shadow-3);
+}
+
+/* arriba */
+.container .card span.tres:nth-child(1) {
+    /* aqui ya seria la clase de tres del SPAN*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, transparent, #fd007fe2);
+    animation: animate1 2s linear infinite;
+}
+
+/* DERECHA */
+.container .card span.tres:nth-child(2) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, #fd007fe2);
+    animation: animate2 2s linear infinite;
+    animation-delay: 1s;
+}
+
+/* ABAJO */
+.container .card span.tres:nth-child(3) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to left, transparent, #fd007fe2);
+    animation: animate3 2s linear infinite;
+    animation-delay: 1s;
+}
+
+/* izquierda */
+.container .card span.tres:nth-child(4) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to top, transparent, #fd007fe2);
+    animation: animate4 2s linear infinite;
+    animation-delay: 1s;
+}
+
+/* en todas los span con sus clases ya no se va a cambiar nada solo se estaria 
+cambiando los colores */
